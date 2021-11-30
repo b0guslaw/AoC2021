@@ -9,6 +9,13 @@
 
 namespace Input
 {
+	/**
+	 * @brief Opens a file and reads the contents based on the delimiter to an std::vector
+	 * @tparam T 
+	 * @param path 
+	 * @param delim 
+	 * @return std::vector<T> 
+	 */
 	template<typename T>
 	std::vector<T> GetData(const std::string& path, char delim = ' ') {
 		std::vector<T> data;
@@ -27,6 +34,13 @@ namespace Input
 		return data;
 	}
 
+	/**
+	 * @brief Special case of GetStringData which considers the input to have empty lines.
+	 * The input file will be treated as strings, where each line is stored as element
+	 * in an std::vector
+	 * @param path 
+	 * @return std::vector<std::string> 
+	 */
 	std::vector<std::string> GetEmptyNewLineData(const std::string& path) {
 		std::ifstream infile(path);
 		std::string temp;
@@ -46,6 +60,11 @@ namespace Input
 		return data;
 	}
 
+	/**
+	 * @brief Reads each line of an input file into an std::vector
+	 * @param path 
+	 * @return std::vector<std::string> 
+	 */
 	std::vector<std::string> GetStringData(const std::string& path){
 		std::vector<std::string> data;
 		std::ifstream infile(path);
