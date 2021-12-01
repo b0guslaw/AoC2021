@@ -2,13 +2,14 @@
 #define DAY_1
 
 #include <vector>
+#include <algorithm>
 
 namespace aoc {
 namespace Day1 {
 	int Part1(const std::vector<int>& data) {
 		int last = data[0];
 		int sum = std::count_if(data.begin(), data.end(), [&](const int depth){
-			int res = depth > last;
+			bool res = depth > last;
 			last = depth;
 			return res;
 		});
