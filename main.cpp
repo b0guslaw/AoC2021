@@ -1,8 +1,10 @@
+#include "Input.h"
+
 #include <chrono>
 
 #include "Day1.h"
 #include "Day2.h"
-#include "Input.h"
+
 
 const std::string dir{"PuzzleInput/"};
 
@@ -29,7 +31,7 @@ void Day1(std::vector<int> data) {
 	print(__func__, std::to_string(part1), std::to_string(part2));
 }
 
-void Day1(std::vector<int> data) {
+void Day2(std::vector<int> data) {
 	int part1, part2;
 	{
 		auto start = std::chrono::high_resolution_clock::now();
