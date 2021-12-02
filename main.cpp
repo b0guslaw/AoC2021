@@ -40,7 +40,7 @@ void Day2(std::vector<std::string> data) {
 	print(__func__, result1, elapsed1, result2, elapsed2);
 }
 
-int main(int argc, const char** argv) {
+int main() {
 	Day1(Input::GetData<int>(dir + "Day1.txt", '\n'));
 	Day2(Input::GetStringData(dir + "Day2.txt"));
 }
