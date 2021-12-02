@@ -14,10 +14,10 @@ auto print = [](const std::string& name, const std::string& part1, double elapse
 				<< "\nPart 2: " << part2 << " elapsed time " <<	elapsed2 << "\n\n";
 };
 
-template<typename T>
-std::tuple<std::string, double> Runner(auto func, std::vector<T> input) {
+template<typename F, typename I>
+std::tuple<std::string, double> Runner(F func, std::vector<I> input) {
 		auto start = std::chrono::high_resolution_clock::now();
-		T result = func(input);
+		int result = func(input);
 		auto end = std::chrono::high_resolution_clock::now();
 		auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 		return std::make_tuple(std::to_string(result), elapsed);
