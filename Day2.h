@@ -8,8 +8,8 @@ namespace Day2 {
 
 const std::string forward{"forward"}, up{"up"}, down{"down"};
 
-int Part1(const std::vector<std::string>& data) {
-	int horiz = 0, depth = 0;
+uint64_t Part1(const std::vector<std::string>& data) {
+	uint64_t horiz{0}, depth{0};
 
 	for (const auto& op : data) {
 		int amount = 0;
@@ -29,8 +29,8 @@ int Part1(const std::vector<std::string>& data) {
 	return horiz * depth;
 }
 
-int Part2(const std::vector<std::string>& data) {
-	int horiz = 0, depth = 0, aim = 0;
+uint64_t Part2(const std::vector<std::string>& data) {
+	uint64_t horiz{0}, depth{0}, aim{0};
 
 	for (const auto& op : data) {
 		int amount = 0;
