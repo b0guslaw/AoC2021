@@ -13,16 +13,16 @@ int Part1(const std::vector<std::string>& data) {
 
 	for (const auto& op : data) {
 		int amount = 0;
-		if (op.starts_with(forward)) {
-			amount = static_cast<int>(op[forward.size() + 1] - 48);
+		if (op[0] == 'f') {
+			amount = static_cast<int>(op[forward.size() + 1]) - '0';
 			horiz += amount;
 		}
-		if (op.starts_with(up)) {
-			amount = static_cast<int>(op[up.size() + 1] - 48);
+		if (op[0] == 'u') {
+			amount = static_cast<int>(op[up.size() + 1]) - '0';
 			depth -= amount;
 		}
-		if (op.starts_with(down)) {
-			amount = static_cast<int>(op[down.size() + 1] - 48);
+		if (op[0] == 'd') {
+			amount = static_cast<int>(op[down.size() + 1]) - '0';
 			depth += amount;
 		}
 	}
@@ -34,17 +34,17 @@ int Part2(const std::vector<std::string>& data) {
 
 	for (const auto& op : data) {
 		int amount = 0;
-		if (op.starts_with(forward)) {
-			amount = static_cast<int>(op[forward.size() + 1] - 48);
+		if (op[0] == 'f') {
+			amount = static_cast<int>(op[forward.size() + 1]) - '0';
 			horiz += amount;
 			depth += (aim * amount);
 		}
-		if (op.starts_with(up)) {
-			amount = static_cast<int>(op[up.size() + 1] - 48);
+		if (op[0] == 'u') {
+			amount = static_cast<int>(op[up.size() + 1]) - '0';
 			aim -= amount;
 		}
-		if (op.starts_with(down)) {
-			amount = static_cast<int>(op[down.size() + 1] - 48);
+		if (op[0] == 'd') {
+			amount = static_cast<int>(op[down.size() + 1]) - '0';
 			aim += amount;
 		}
 	}
