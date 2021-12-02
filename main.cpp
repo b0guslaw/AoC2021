@@ -11,8 +11,8 @@ const std::string dir{"PuzzleInput/"};
 
 auto print = [](const std::string& name, const std::string& part1, double elapsed1, const std::string& part2, double elapsed2){
 	std::cout << "\t~~~ " << name << " ~~~"
-				<< "\nPart 1: " << part1 << " elapsed time " <<	elapsed1 
-				<< "\nPart 2: " << part2 << " elapsed time " <<	elapsed2 << "\n\n";
+				<< "\nPart 1: " << part1 << " elapsed time " <<	elapsed1 << "us"
+				<< "\nPart 2: " << part2 << " elapsed time " <<	elapsed2 << "us\n\n";
 };
 
 template<typename F, typename I>
