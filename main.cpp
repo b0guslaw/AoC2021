@@ -1,6 +1,7 @@
 #include "Input.h"
 
 #include <chrono>
+#include <variant>
 
 #include "Day1.h"
 #include "Day2.h"
@@ -17,10 +18,14 @@ auto print = [](const std::string& name, const std::string& part1, double elapse
 template<typename F, typename I>
 std::tuple<std::string, double> Runner(F func, std::vector<I> input) {
 		auto start = std::chrono::high_resolution_clock::now();
-		int result = func(input);
+		std::variant<std::string, int> result = func(input);
 		auto end = std::chrono::high_resolution_clock::now();
 		auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
-		return std::make_tuple(std::to_string(result), elapsed);
+		try {
+			return std::make_tuple(std::get<std::string>(result), elapsed);
+		} catch (const std::bad_variant_access& ex) {
+			return std::make_tuple(std::to_string(std::get<int>(result)), elapsed);
+		}
 }
 
 void Day1(std::vector<int> data) {
