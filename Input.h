@@ -8,6 +8,7 @@
 #include <utility>
 #include <algorithm>
 #include <numeric>
+#include <vector>
 
 namespace Input
 {

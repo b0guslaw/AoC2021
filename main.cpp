@@ -1,7 +1,6 @@
 #include "Input.h"
 
 #include <chrono>
-#include <variant>
 
 #include "Day1.h"
 #include "Day2.h"
