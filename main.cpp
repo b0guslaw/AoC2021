@@ -4,7 +4,7 @@
 
 #include "Day1.h"
 #include "Day2.h"
-
+#include "Day3.h"
 
 const std::string dir{"PuzzleInput/"};
 
@@ -36,8 +36,8 @@ void Day2(std::vector<std::string> data) {
 }
 
 void Day3(std::vector<std::string> data) {
-	auto [result1, elapsed1] = Runner(aoc::Day2::Part1, data);
-	auto [result2, elapsed2] = Runner(aoc::Day2::Part2, data);
+	auto [result1, elapsed1] = Runner(aoc::Day3::Part1, data);
+	auto [result2, elapsed2] = Runner(aoc::Day3::Part2, data);
 	print(__func__, result1, elapsed1, result2, elapsed2);
 }
 
