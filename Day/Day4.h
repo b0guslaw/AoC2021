@@ -96,15 +96,6 @@ uint64_t Part1(const std::vector<std::string>& data) {
 	return 0;
 }
 
-void print(Board& b) {
-	for(size_t i{0}; i < 5; ++i) {
-		std::cout << "\n";
-		for (size_t  j{0}; j < 5; j++) {
-			std::cout << b[i * 5 + j].first << ":" << b[i * 5 + j].second << "\t";
-		}
-	}
-}
-
 uint64_t Part2(const std::vector<std::string>& data) {
 	std::vector<int> draws = parse_line(data[0]);
 	std::vector<Board> boards;
