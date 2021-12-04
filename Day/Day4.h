@@ -5,6 +5,7 @@
 #include <numeric>
 #include <sstream>
 #include <utility>
+#include <set>
 
 namespace aoc {
 namespace Day4 {
@@ -44,24 +45,21 @@ void update(Board& board, int num) {
 
 bool determine_win(const Board& board) {
 	bool won = false;
-
 	// Check Rows
 	for (size_t i{0}; i < board.size(); i += 5) {
-		if (i + 4 > board.size()) break;
+		if (i + 1 >= board.size()) break;
 		won = board[i].second && board[i + 1].second && board[i + 2].second && board[i + 3].second && board[i + 4].second;
 		if (won) {
 			return won;
 		}
 	}
-
 	//Check Columns
 	for(size_t i{0}; i < 5; i++) {
-		won = board[i].second && board[1 * 5 + i].second && board[2 * 5 + i].second && board[3 * 5 + i].second && board[4 * 5 + i].second;
+		won = board[0 * 5 + i].second && board[1 * 5 + i].second && board[2 * 5 + i].second && board[3 * 5 + i].second && board[4 * 5 + i].second;
 		if (won) {
 			return won;
 		}
 	}
-	
 	return won;
 }
 
@@ -72,7 +70,6 @@ uint64_t get_sum(const Board& board) {
 			 sum += entry.first;
 		 }
 	 }
-	 std::cout << "\n";
 	 return sum;
 }
 
@@ -99,10 +96,38 @@ uint64_t Part1(const std::vector<std::string>& data) {
 	return 0;
 }
 
+void print(Board& b) {
+	for(size_t i{0}; i < 5; ++i) {
+		std::cout << "\n";
+		for (size_t  j{0}; j < 5; j++) {
+			std::cout << b[i * 5 + j].first << ":" << b[i * 5 + j].second << "\t";
+		}
+	}
+}
+
 uint64_t Part2(const std::vector<std::string>& data) {
-	auto d = data;
+	std::vector<int> draws = parse_line(data[0]);
+	std::vector<Board> boards;
+
+	for (size_t i{1}; i < data.size(); ++i) {
+		boards.push_back(parse_board_line(data[i]));
+	}
+
+	for (auto draw : draws) {
+		for (size_t i{0}; i < boards.size(); i++) {
+		update(boards[i], draw);
+		if (determine_win(boards[i])) {
+			if (boards.size() > 1) {
+				boards.erase(boards.begin() + i--);
+			} else if (boards.size() == 1) {
+				return draw * get_sum(boards[0]);
+			}
+		}
+		}
+	}
 	return 0;
 }
+
 }
 }
 #endif
