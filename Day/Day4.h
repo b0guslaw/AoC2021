@@ -42,23 +42,16 @@ void update(Board& board, int num) {
 		}
 	}
 }
-
 bool determine_win(const Board& board) {
 	bool won = false;
 	// Check Rows
-	for (size_t i{0}; i < board.size(); i += 5) {
+	for (size_t i{0}; !won && i < board.size(); i += 5) {
 		if (i + 1 >= board.size()) break;
 		won = board[i].second && board[i + 1].second && board[i + 2].second && board[i + 3].second && board[i + 4].second;
-		if (won) {
-			return won;
-		}
 	}
 	//Check Columns
-	for(size_t i{0}; i < 5; i++) {
+	for(size_t i{0}; !won && i < 5; i++) {
 		won = board[0 * 5 + i].second && board[1 * 5 + i].second && board[2 * 5 + i].second && board[3 * 5 + i].second && board[4 * 5 + i].second;
-		if (won) {
-			return won;
-		}
 	}
 	return won;
 }
