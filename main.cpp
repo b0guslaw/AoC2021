@@ -52,5 +52,5 @@ int main() {
 	Day1(Input::GetData<int>(dir + "Day1.txt", '\n'));
 	Day2(Input::GetStringData(dir + "Day2.txt"));
 	Day3(Input::GetStringData(dir + "Day3.txt"));
-	Day4(Input::GetStringData(dir + "Day4.txt"));
+	Day4(Input::GetEmptyNewLineData(dir + "Day4.txt"));
 }
