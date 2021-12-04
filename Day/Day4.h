@@ -2,50 +2,105 @@
 #define DAY_4
 
 #include <vector>
-#include <array>
+#include <numeric>
 #include <sstream>
-#include <tuple>
+#include <utility>
 
 namespace aoc {
 namespace Day4 {
 
-using Board = std::array<std::vector<std::tuple<int, bool>>, 5>;
+using Board = std::vector<std::pair<int, bool>>;
 
 std::vector<int> parse_line(const std::string& s) {
-	std::cout << "Parsing Line...\n";
 	int num;
 	std::stringstream iss(s);
 
 	std::vector<int> t;
 	while(iss >> num) {
+		if (iss.peek() == ',') iss.ignore();
 		t.push_back(num);
 	}
-	std::cout << "Parsing Line done!\n";
 	return t;
 }
 
-Board construct_board(const std::string& s) {
-	
-}
-
-std::vector<std::tuple<int, bool>> parse_board_line(const std::string& s) {
-	std::cout << "Parsing Board line...\n";
+Board parse_board_line(const std::string& s) {
 	int num;
 	std::stringstream iss(s);
-	std::vector<std::tuple<int, bool>> t;
+
+	Board t;
 	while(iss >> num) {
-		t.push_back(std::make_tuple(num, false));
+		t.push_back(std::make_pair(num, false));
 	}
-	std::cout << "Parsing board line done!\n";
 	return t;
+}
+
+void update(Board& board, int num) {
+	for (auto& entry : board) {
+		if (entry.first == num) {
+			entry.second = true;
+		}
+	}
+}
+
+bool determine_win(const Board& board) {
+	bool won = false;
+
+	// Check Rows
+	for (size_t i{0}; i < board.size(); i += 5) {
+		if (i + 4 > board.size()) break;
+		won = board[i].second && board[i + 1].second && board[i + 2].second && board[i + 3].second && board[i + 4].second;
+		if (won) {
+			return won;
+		}
+	}
+
+	//Check Columns
+	for(size_t i{0}; i < 5; i++) {
+		won = board[i].second && board[1 * 5 + i].second && board[2 * 5 + i].second && board[3 * 5 + i].second && board[4 * 5 + i].second;
+		if (won) {
+			return won;
+		}
+	}
+	
+	return won;
+}
+
+uint64_t get_sum(const Board& board) {
+	 uint64_t sum = 0;
+	 for (auto& entry : board) {
+		 if (!entry.second) {
+			 sum += entry.first;
+		 }
+	 }
+	 std::cout << "\n";
+	 return sum;
 }
 
 uint64_t Part1(const std::vector<std::string>& data) {
 	std::vector<int> draws = parse_line(data[0]);
+	
+	std::vector<Board> boards;
+
+	for (size_t i{1}; i < data.size(); ++i) {
+		boards.push_back(parse_board_line(data[i]));
+	}
+
+	bool no_winner = true;
+	while(no_winner) {
+		for (auto num : draws) {
+			for (auto& board : boards) {
+				update(board, num);
+				if (determine_win(board)) {
+					return num * get_sum(board);
+				}
+			}
+		}
+	}
 	return 0;
 }
 
 uint64_t Part2(const std::vector<std::string>& data) {
+	auto d = data;
 	return 0;
 }
 }
