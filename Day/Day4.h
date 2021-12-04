@@ -40,7 +40,6 @@ void update(Board& board, int num) {
 		}
 	}
 }
-
 bool determine_win(const Board& board) {
 	bool won = false;
 	// Check Rows
