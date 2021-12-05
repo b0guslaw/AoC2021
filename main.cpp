@@ -55,10 +55,17 @@ void Day5(std::vector<std::string> data) {
 	print(__func__, result1, elapsed1, result2, elapsed2);
 }
 
+void Day6(std::vector<std::string> data) {
+	auto [result1, elapsed1] = Runner(aoc::Day5::Part1, data);
+	auto [result2, elapsed2] = Runner(aoc::Day5::Part2, data);
+	print(__func__, result1, elapsed1, result2, elapsed2);
+}
+
 int main() {
 	Day1(Input::GetData<int>(dir + "Day1.txt", '\n'));
 	Day2(Input::GetStringData(dir + "Day2.txt"));
 	Day3(Input::GetStringData(dir + "Day3.txt"));
 	Day4(Input::GetEmptyNewLineData(dir + "Day4.txt"));
 	Day5(Input::GetStringData(dir + "Day5.txt"));
+	Day5(Input::GetStringData(dir + "Day6.txt"));
 }
