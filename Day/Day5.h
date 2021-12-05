@@ -49,31 +49,11 @@ void fill_field2(const std::vector<std::string> &input, std::map<Point, int>& fi
 				++field[{x, y1}];
 			}
 		} else {
-			// This used to be an attempt to make the algorithm look nicer, but the Gods of git
-			// were not happy and so I had to sacrify its correctness
-			//	int ux = 1, uy = 1;
-			//	if (x1 > x2) { ux = -1; }
-			//	if (y1 > y2) { uy = -1; }
-			//	for (int _x{x1}, _y{y1}; _x != x2; ) {
-			//		++field[{ _x += ux, _y += uy }];
-			//	}
-
-
-			if (x1 < x2) {
-				if (y1 < y2) {
-					for (int _x{x1}, _y{y1}; _x <= x2;) ++field[{_x++, _y++}];
-				}
-				if (y1 > y2) {
-					for (int _x{x1}, _y{y1}; _x <= x2;) ++field[{_x++, _y--}];
-				}
-			}
-			if (x1 > x2) {
-				if (y1 < y2) {
-					for (int _x{x1}, _y{y1}; _x >= x2;) ++field[{_x--, _y++}];
-				}
-				if (y1 > y2) {
-					for (int _x{x1}, _y{y1}; _x >= x2;) ++field[{_x--, _y--}];
-				}
+			int ux = 1, uy = 1;
+			if (x1 > x2) { ux = -1; }
+			if (y1 > y2) { uy = -1; }
+			for (int _x{x1 - ux}, _y{y1 - uy}; _x != x2; ) {
+				++field[{ _x += ux, _y += uy }];
 			}
 		}
 	}
