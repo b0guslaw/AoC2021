@@ -6,15 +6,21 @@
 #include <sstream>
 #include <iostream>
 #include <algorithm>
-#include <map>
+#include <unordered_map>
 
 namespace aoc {
 namespace Day5 {
 
 using Point = std::pair<int, int>;
 
-using Point = std::pair<int, int>;
-void fill_field1(const std::vector<std::string> &input, std::map<Point, int>& field) {
+struct pair_hash
+{
+    std::size_t operator() (const std::pair<int, int> &pair) const {
+        return pair.first * 10000 * pair.second;
+    }
+};
+
+void fill_field1(const std::vector<std::string> &input, std::unordered_map<Point, int, pair_hash>& field) {
     int x1, y1, x2, y2;
     char c_discard; std::string s_discard;
     for(const auto& line : input) {
@@ -34,7 +40,7 @@ void fill_field1(const std::vector<std::string> &input, std::map<Point, int>& fi
     }
 }
 
-void fill_field2(const std::vector<std::string> &input, std::map<Point, int>& field) {
+void fill_field2(const std::vector<std::string> &input, std::unordered_map<Point, int, pair_hash>& field) {
     int x1, y1, x2, y2;
     char c_discard; std::string s_discard;
 	for(const auto& line : input) {
@@ -60,7 +66,7 @@ void fill_field2(const std::vector<std::string> &input, std::map<Point, int>& fi
 }
 
 uint64_t Part1(const std::vector<std::string>& data) {
-	std::map<Point, int> field;
+	std::unordered_map<Point, int, pair_hash> field;
 	fill_field1(data, field);
 
 	int overlaps = 0;
@@ -71,7 +77,7 @@ uint64_t Part1(const std::vector<std::string>& data) {
 }
 
 uint64_t Part2(const std::vector<std::string>& data) {
-	std::map<Point, int> field;
+	std::unordered_map<Point, int, pair_hash> field;
 	fill_field2(data, field);
 
 	int overlaps = 0;
@@ -80,6 +86,8 @@ uint64_t Part2(const std::vector<std::string>& data) {
 	}
 	return static_cast<uint64_t>(overlaps);
 }
+
+
 
 }
 }
