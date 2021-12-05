@@ -26,7 +26,8 @@ void fill_field1(const std::vector<std::string> &input, std::unordered_map<Point
     for(const auto& line : input) {
         std::stringstream iss(line);
         iss >> x1 >> c_discard >> y1 >> s_discard >> x2 >> c_discard >> y2;
-        if (x1 == x2) {
+
+		if (x1 == x2) {
             for (int y{std::min(y1, y2)}; y <= std::max(y1,y2); y++) {
                 ++field[{x1, y}];
             }
@@ -46,10 +47,12 @@ void fill_field2(const std::vector<std::string> &input, std::unordered_map<Point
 	for(const auto& line : input) {
 		std::stringstream iss(line);
 		iss >> x1 >> c_discard >> y1 >> s_discard >> x2 >> c_discard >> y2;
+		
 		if (x1 == x2) {
 			for (int y{std::min(y1, y2)}; y <= std::max(y1, y2); y++) {
 				++field[{x1, y}];
 			}
+		
 		} else if (y1 == y2) {
 			for (int x{std::min(x1, x2)}; x <= std::max(x1, x2); x++) {
 				++field[{x, y1}];
@@ -67,6 +70,7 @@ void fill_field2(const std::vector<std::string> &input, std::unordered_map<Point
 
 uint64_t Part1(const std::vector<std::string>& data) {
 	std::unordered_map<Point, int, pair_hash> field;
+	field.reserve(data.size() * 1000);
 	fill_field1(data, field);
 
 	int overlaps = 0;
@@ -78,6 +82,7 @@ uint64_t Part1(const std::vector<std::string>& data) {
 
 uint64_t Part2(const std::vector<std::string>& data) {
 	std::unordered_map<Point, int, pair_hash> field;
+	field.reserve(data.size() * 1000);
 	fill_field2(data, field);
 
 	int overlaps = 0;
