@@ -56,6 +56,7 @@ void fill_field2(const std::vector<std::string> &input, std::vector<int>& board)
 		if (temp_max > max_size) { max_size = temp_max; }
 	}
 
+	++max_size;
 	board.resize(max_size * max_size);
 	for (const auto& segment : field) {
 		x1 = segment[0]; y1 = segment[1];
