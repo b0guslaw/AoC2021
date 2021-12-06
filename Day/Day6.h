@@ -13,7 +13,8 @@ namespace Day6 {
 const int breeding_day = 6;
 const int death_day = 0;
 
-inline void load_data(std::array<uint64_t, 9>& fish, const std::vector<int>& data) {
+template<size_t T>
+inline void load_data(std::array<uint64_t, T>& fish, const std::vector<int>& data) {
 	std::for_each(data.begin(), data.end(), [&](uint64_t day) {
 		++fish[day];
 	});
@@ -33,13 +34,15 @@ void run_simulation(std::array<uint64_t, T>& fish) {
 	}
 }
 
-inline uint64_t sum(std::array<uint64_t, 9> fish) {
+template<size_t T>
+inline uint64_t sum(std::array<uint64_t, T> fish) {
 	return std::accumulate(fish.begin(), fish.end(), 0ULL);
 }
 
+
 uint64_t Part1(const std::vector<int>& data) {
 	std::array<uint64_t, 9> fish{};
-	load_data(fish, data);
+	load_data<9>(fish, data);
 	run_simulation<80>(fish);
 	return sum(fish);
 }
