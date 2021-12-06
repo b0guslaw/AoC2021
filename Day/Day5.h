@@ -5,8 +5,6 @@
 #include <string>
 #include <sstream>
 #include <iostream>
-#include <algorithm>
-#include <unordered_map>
 
 namespace aoc {
 namespace Day5 {
@@ -106,8 +104,6 @@ uint64_t Part2(const std::vector<std::string>& data) {
 		})
 	);
 }
-
-
 
 }
 }
