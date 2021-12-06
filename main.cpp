@@ -7,6 +7,7 @@
 #include "Day/Day3.h"
 #include "Day/Day4.h"
 #include "Day/Day5.h"
+#include "Day/Day6.h"
 
 const std::string dir{"PuzzleInput/"};
 
@@ -55,7 +56,7 @@ void Day5(std::vector<std::string> data) {
 	print(__func__, result1, elapsed1, result2, elapsed2);
 }
 
-void Day6(std::vector<std::string> data) {
+void Day6(std::vector<int> data) {
 	auto [result1, elapsed1] = Runner(aoc::Day6::Part1, data);
 	auto [result2, elapsed2] = Runner(aoc::Day6::Part2, data);
 	print(__func__, result1, elapsed1, result2, elapsed2);
@@ -67,5 +68,5 @@ int main() {
 	Day3(Input::GetStringData(dir + "Day3.txt"));
 	Day4(Input::GetEmptyNewLineData(dir + "Day4.txt"));
 	Day5(Input::GetStringData(dir + "Day5.txt"));
-	Day6(Input::GetStringData(dir + "Day6.txt"));
+	Day6(Input::GetData<int>(dir + "Day6.txt", ','));
 }
