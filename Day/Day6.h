@@ -34,11 +34,7 @@ void run_simulation(std::array<uint64_t, T>& fish) {
 }
 
 inline uint64_t sum(std::array<uint64_t, 9> fish) {
-	uint64_t sum = 0;
-	for (auto& day : fish) {
-		sum += day;
-	}
-	return sum;
+	return std::accumulate(fish.begin(), fish.end(), 0ULL);
 }
 
 uint64_t Part1(const std::vector<int>& data) {
