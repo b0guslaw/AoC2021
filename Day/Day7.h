@@ -13,27 +13,22 @@ namespace Day7 {
 uint64_t Part1(const std::vector<int>& data) {
 	auto crabs = data;
 	std::sort(crabs.begin(), crabs.end());
-	int pivot = crabs[crabs.size() / 2];
+	int64_t pivot = crabs[crabs.size() / 2];
 	return std::accumulate(crabs.begin(), crabs.end(), 0ULL, [&](const int& sum, const int& crab) {
-		return sum + std::abs(crab - pivot);
+		return sum + std::abs(crab - static_cast<int64_t>(pivot));
 	});
 }
 
 uint64_t Part2(const std::vector<int>& data) {
-	auto [min, max] = std::minmax_element(data.begin(), data.end());
-
-	int closest = std::numeric_limits<int>::max();
-	for (int i = *min; i <= *max; i++) {
-		int totalfuel = 0;
-		for (auto& crab : data){
-			totalfuel += std::abs(crab - i) * (std::abs(crab - i) + 1) / 2;
-		}
-
-		if (totalfuel < closest) {
-			closest = totalfuel;
-		}
-	}
-	return closest;
+	auto crabs = data;
+	std::sort(crabs.begin(), crabs.end());
+	int64_t pivot = crabs[crabs.size() / 2];
+	int64_t avg = std::accumulate(crabs.begin(), crabs.end(), 0ULL) / crabs.size();
+	if (avg < pivot) { avg++; }
+	return std::accumulate(crabs.begin(), crabs.end(), 0ULL, [&](const int& sum, const int& crab) {
+		int64_t d = std::abs(crab - avg);
+		return sum + ((d * (d + 1)) / 2);
+	});
 }
 
 }
