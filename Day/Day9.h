@@ -7,34 +7,27 @@
 namespace aoc {
 namespace Day9 {
 
-uint64_t Part1(const std::vector<std::string>& data) {
+uint64_t Part1(std::vector<std::string>& data) {
 
-	int total = 0;
+	std::vector<std::string> field;
+	field.emplace_back(std::string(data[0].size() + 2, '9'));
+	for (auto& line : data) {
+		line.insert(0, 1 ,'9');
+		line += '9';
+		field.push_back(line);
+	}
+	field.emplace_back(std::string(data[0].size(), '9'));
 
-	auto lowest = [&](const int x, const int y) {
-		if (data[x][y] == '0') { return true; }
-		if (data[x][y] == '9') { return false; }
-		int tocheck = data[x][y];
-		if (x == 0) {
-			if (y == 0) { return data[x][y+1] > tocheck && data[x+1][y] > tocheck; }
-			if (y == data[0].size() - 1) { return data[x][y-1] > tocheck && data[x+1][y] > tocheck; }
-			return data[x][y-1] > tocheck && data[x][y+1] > tocheck && data[x+1][y];
-		}
-
-		if (x == data.size() - 1) {
-			if (y == 0) { return data[x][y+1] > tocheck && data[x-1][y] > tocheck; }
-			if (y == data[0].size() - 1) { return data[x][y-1] > tocheck && data[x-1][y] > tocheck; }
-			return data[x][y-1] > tocheck && data[x][y+1] > tocheck && data[x-1][y] > tocheck;
-		}
-
-		return data[x - 1][y] > tocheck && data[x+1][y] > tocheck
-				&& data[x][y-1] > tocheck && data[x][y+1] > tocheck;
+	const auto lowest = [&](const int row, const int col) {
+	return field[row-1][col] > field[row][col] && field[row+1][col] > field[row][col] &&
+		   field[row][col+1] > field[row][col] && field[row][col-1] > field[row][col];
 	};
 
-	for (int row{0}; row < data.size(); row++) {
-		for (int col{0}; col < data[0].size(); col++) {
+	int total = 0;
+	for (int row{1}; row < field.size() - 1; row++) {
+		for (int col{1}; col < field[row].length() - 1; col++) {
 			if (lowest(row, col)) {
-				total += (data[row][col] - '0') + 1;
+				total += 1 + (field[row][col] - '0');
 			}
 		}
 	}
