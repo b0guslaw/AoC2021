@@ -46,7 +46,7 @@ uint64_t Part1(const std::vector<std::string>& data) {
 	return total;
 }
 
-uint64_t flood_fill(std::vector<std::string>& field, unsigned x, unsigned int y) {
+uint64_t flood_fill(std::vector<std::string>& field, unsigned int x, unsigned int y) {
 	const auto width{static_cast<int>(field.front().size()) - 1};
 	const auto height{static_cast<int>(field.size()) - 1};
 
