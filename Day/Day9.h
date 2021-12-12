@@ -91,8 +91,7 @@ uint64_t Part2(const std::vector<std::string>& data) {
 			}
 		}
 	}
-
-	std::sort(basin_sizes.begin(), basin_sizes.end(), std::greater<int>{});
+	std::nth_element(basin_sizes.begin(), basin_sizes.begin() + 3, basin_sizes.end(), std::greater<int>());
 	return basin_sizes[0] * basin_sizes[1] * basin_sizes[2];
 }
 
