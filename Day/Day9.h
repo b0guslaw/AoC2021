@@ -12,16 +12,16 @@ namespace Day9 {
 uint64_t Part1(const std::vector<std::string>& data) {
 	uint64_t total{0};
 	
-	const int width{static_cast<int>(data.front().length())};
-	const int height{static_cast<int>(data.size())};
+	const auto width{static_cast<int>(data.front().size()) - 1};
+	const auto height{static_cast<int>(data.size()) - 1};
 
 	const auto is_valid = [&](unsigned int x, unsigned int y){
-		auto isvalid =  x <= height - 1 && y <= width - 1;
+		auto isvalid =  x <= height&& y <= width;
 		return isvalid;
 	};
 
-	for (unsigned x{0}; x < height; x++) {
-		for (unsigned int y{0}; y < width; y++) {
+	for (size_t x{0}; x <= height; x++) {
+		for (size_t y{0}; y <= width; y++) {
 			
 			static constexpr char max{'9'};
 
@@ -29,7 +29,7 @@ uint64_t Part1(const std::vector<std::string>& data) {
 				continue;
 			}
 
-			const auto neighbours = std::array<char, 4> {
+			const auto neighbours = std::array {
 					is_valid(x - 1, y) ? data[x - 1][y] : max,
 					is_valid(x + 1, y) ? data[x + 1][y] : max,
 					is_valid(x, y + 1) ? data[x][y + 1] : max,
@@ -37,18 +37,18 @@ uint64_t Part1(const std::vector<std::string>& data) {
 			};
 
 			const auto minimum = std::all_of(neighbours.begin(), neighbours.end(), [&](const char neighbour) {
-				 return neighbour > data.at(x).at(y);;
+				 return neighbour > data.at(x).at(y);
 			});
 
-			total += static_cast<int>(data.at(x).at(y) - 47) * minimum;
+			total += static_cast<int>(data.at(x).at(y) - 47) * minimum; // char - '0' + 1 => char - 47
 		}
 	}
 	return total;
 }
 
 uint64_t flood_fill(std::vector<std::string>& field, unsigned x, unsigned int y) {
-	const int width{static_cast<int>(field.front().length()) - 1};
-	const int height{static_cast<int>(field.size()) - 1};
+	const auto width{static_cast<int>(field.front().size()) - 1};
+	const auto height{static_cast<int>(field.size()) - 1};
 
 	uint64_t size{1};
 	static constexpr char max{'9'};
@@ -82,8 +82,8 @@ uint64_t Part2(const std::vector<std::string>& data) {
 	const int width{static_cast<int>(field.front().length())};
 	const int height{static_cast<int>(field.size())};
 	
-	for(int x{0}; x < height; x++) {
-		for (int y{0}; y < width; y++) {
+	for(size_t x{0}; x < height; x++) {
+		for (size_t y{0}; y < width; y++) {
 			if (field[x][y] < '9') {
 				basin_sizes.push_back(
 					flood_fill(field, x, y)
