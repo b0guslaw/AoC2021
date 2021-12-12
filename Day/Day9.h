@@ -79,8 +79,8 @@ uint64_t Part2(const std::vector<std::string>& data) {
 	std::vector<uint64_t> basin_sizes;
 	auto field = data;
 
-	const int width{static_cast<int>(field.front().length())};
-	const int height{static_cast<int>(field.size())};
+	const auto width{static_cast<int>(field.front().length())};
+	const auto height{static_cast<int>(field.size())};
 	
 	for(size_t x{0}; x < height; x++) {
 		for (size_t y{0}; y < width; y++) {
