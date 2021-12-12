@@ -12,10 +12,10 @@ namespace Day9 {
 uint64_t Part1(const std::vector<std::string>& data) {
 	uint64_t total{0};
 	
-	int width{static_cast<int>(data.front().length())};
-	int height{static_cast<int>(data.size())};
+	const int width{static_cast<int>(data.front().length())};
+	const int height{static_cast<int>(data.size())};
 
-	auto const is_valid = [&](unsigned int x, unsigned int y){
+	const auto is_valid = [&](unsigned int x, unsigned int y){
 		auto isvalid =  x <= height - 1 && y <= width - 1;
 		return isvalid;
 	};
@@ -61,17 +61,17 @@ uint64_t flood_fill(std::vector<std::string>& field, unsigned x, unsigned int y)
 		{0,-1}
 	}};
 
-	auto const is_valid = [&](unsigned int x, unsigned int y){
+	const auto is_valid = [&](unsigned int x, unsigned int y){
 		auto isvalid = x <= height && y <= width && field[x][y] < max;
 		return isvalid;
 	};
 
-	for (auto& dir : directions) {
+	for (const auto& dir : directions) {
 		if (is_valid(x + dir[0], y + dir[1])) {
 			size += flood_fill(field, x + dir[0], y + dir[1]);
 		}
 	}
-	
+
 	return size;
 }
 
@@ -79,8 +79,8 @@ uint64_t Part2(const std::vector<std::string>& data) {
 	std::vector<uint64_t> basin_sizes;
 	auto field = data;
 
-	int width{static_cast<int>(field.front().length())};
-	int height{static_cast<int>(field.size())};
+	const int width{static_cast<int>(field.front().length())};
+	const int height{static_cast<int>(field.size())};
 	
 	for(int x{0}; x < height; x++) {
 		for (int y{0}; y < width; y++) {
