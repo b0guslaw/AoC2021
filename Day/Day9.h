@@ -11,7 +11,7 @@ namespace Day9 {
 
 uint64_t Part1(const std::vector<std::string>& data) {
 	uint64_t total{0};
-	
+
 	const auto width{static_cast<int>(data.front().size()) - 1};
 	const auto height{static_cast<int>(data.size()) - 1};
 
@@ -22,7 +22,7 @@ uint64_t Part1(const std::vector<std::string>& data) {
 
 	for (size_t x{0}; x <= height; x++) {
 		for (size_t y{0}; y <= width; y++) {
-			
+
 			static constexpr char max{'9'};
 
 			if (data[x][y] == max) {
@@ -81,7 +81,7 @@ uint64_t Part2(const std::vector<std::string>& data) {
 
 	const auto width{static_cast<int>(field.front().length())};
 	const auto height{static_cast<int>(field.size())};
-	
+
 	for(size_t x{0}; x < height; x++) {
 		for (size_t y{0}; y < width; y++) {
 			if (field[x][y] < '9') {

@@ -66,7 +66,7 @@ uint64_t get_sum(const Board& board) {
 
 uint64_t Part1(const std::vector<std::string>& data) {
 	std::vector<int> draws = parse_line(data[0]);
-	
+
 	std::vector<Board> boards;
 
 	for (size_t i{1}; i < data.size(); ++i) {
