@@ -38,41 +38,62 @@ uint64_t Part1(const std::vector<std::string>& data) {
 	return total;
 }
 
-uint64_t decode(const std::array<char, 7> &positions, const std::string& segment) {
-	switch (segment.length()) {
-		case 2: return 1;
-		case 4: return 4;
-		case 3: return 7;
-		case 7: return 8;
-		default: break;
-	}
+int decode(const std::vector<std::string> patterns, const std::vector<std::string>& numbers) {
+	
+	std::string result{};
+	for (auto& n : numbers) {
+		int sz = n.size();
+		switch (sz) {
+			case 2: result += '1'; break;
+			case 3: result += '7'; break;
+			case 4: result += '4'; break;
+			case 7: result += '8'; break;
+		}
 
-	return 0;
+		if (sz == 5) {
+			if (std::all_of(patterns.at(0).begin(), patterns.at(0).end(), [&](const char& c) {
+				return std::find(n.begin(), n.end(), c) != n.end();
+			})) {
+				result += '3';
+			} else if (std::count_if(patterns[2].begin(), patterns[2].end(), [&](const char& c) {
+				return std::find(n.begin(), n.end(), c) != n.end(); }) == 2) {
+				result += '2';
+			} else {
+				result += '5';
+			}
+		} else if (sz == 6) {
+			if (std::all_of(patterns[0].begin(), patterns[0].end(), [&](const char& c) { return std::find(n.begin(), n.end(), c) != n.end(); })) {
+				if (std::count_if(patterns[2].begin(), patterns[2].end(), [&](const char& c) { return std::find(n.begin(), n.end(), c) != n.end(); }) == 3) {
+					result += "0";
+				} else {
+					result += '9';
+				}
+			} else {
+				result += '6';
+			}
+		} 
+
+	}
+	return std::stoi(result);
 }
 
 uint64_t Part2(const std::vector<std::string>& data) {
-	std::string token;
+	
+	uint64_t total{0};
 	for (auto& line : data) {
-
-		std::array<char, 7> positions;
-
-		auto connect = [&](char pos, char letter) { positions[letter - 'a'] = pos; };
-
-		std::vector<std::string> lhs, rhs;
-		std::stringstream iss(line);
-		for(; iss >> token; lhs.emplace_back(token)) { if(token == "|") break; }
-		for(; iss >> token; rhs.emplace_back(token));
-
-		std::sort(lhs.begin(), lhs.end(), [](const auto& lhs, const auto& rhs){ return lhs.length() < rhs.length(); });
-
-		const auto& one = lhs[0];
-		const auto& four = lhs[1];
-		const auto& seven = lhs[2];
-
+		std::vector<std::string> patterns, numbers;
 		
+		std::stringstream iss(line);
+		std::string token;
+
+		for(; iss >> token; patterns.emplace_back(token)) { if(token == "|") break; }
+		std::sort(patterns.begin(), patterns.end(), [](const auto& lhs, const auto& rhs){ return lhs.length() < rhs.length(); });
+		for(; iss >> token; numbers.emplace_back(token));
+
+		total += decode(patterns, numbers);
 	}
 
-	return 0;
+	return total;
 }
 
 }
