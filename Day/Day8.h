@@ -15,10 +15,10 @@ uint64_t Part1(const std::vector<std::string>& data) {
 	bool counting = false;
 
 	uint64_t total{0};
-	for (auto& line : data) {
-		std::string signal;
-		std::stringstream iss(line);
+	std::string signal;
 
+	for (auto& line : data) {
+		std::stringstream iss(line);
 		while(iss >> signal) {
 			if (counting) {
 				if (signal.size() == 2 || signal.size() == 3
@@ -39,7 +39,7 @@ uint64_t Part1(const std::vector<std::string>& data) {
 }
 
 int decode(const std::vector<std::string> patterns, const std::vector<std::string>& numbers) {
-	
+
 	std::string result{};
 	for (auto& n : numbers) {
 		int sz = n.size();
@@ -63,7 +63,7 @@ int decode(const std::vector<std::string> patterns, const std::vector<std::strin
 			}
 		} else if (sz == 6) {
 			if (std::all_of(patterns[0].begin(), patterns[0].end(), [&](const char& c) { return std::find(n.begin(), n.end(), c) != n.end(); })) {
-				if (std::count_if(patterns[2].begin(), patterns[2].end(), [&](const char& c) { return std::find(n.begin(), n.end(), c) != n.end(); }) == 3) {
+				if (std::count_if(patterns.at(2).begin(), patterns.at(2).end(), [&](const char& c) { return std::find(n.begin(), n.end(), c) != n.end(); }) == 3) {
 					result += "0";
 				} else {
 					result += '9';
@@ -71,18 +71,18 @@ int decode(const std::vector<std::string> patterns, const std::vector<std::strin
 			} else {
 				result += '6';
 			}
-		} 
+		}
 
 	}
 	return std::stoi(result);
 }
 
 uint64_t Part2(const std::vector<std::string>& data) {
-	
+
 	uint64_t total{0};
 	for (auto& line : data) {
 		std::vector<std::string> patterns, numbers;
-		
+
 		std::stringstream iss(line);
 		std::string token;
 
