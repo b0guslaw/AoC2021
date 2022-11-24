@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <array>
 
 namespace aoc {
 namespace Day5 {

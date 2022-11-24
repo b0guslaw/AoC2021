@@ -7,6 +7,7 @@
 namespace aoc {
 namespace Day11 {
 
+[[no_return]]
 uint64_t Part1(const std::vector<std::string>& data) {
     
 }
